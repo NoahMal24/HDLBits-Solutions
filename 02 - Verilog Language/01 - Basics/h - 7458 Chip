@@ -1,1 +1,18 @@
+module top_module ( 
 
+    input p1a, p1b, p1c, p1d, p1e, p1f,
+    output p1y,
+    input p2a, p2b, p2c, p2d,
+    output p2y );
+    
+    wire andtl, andbl, andtr, andbr;
+    //Wires from each of the and gates
+    assign {andtl, andbl, andtr, andbr} = {p2a & p2b, p2c & p2d, p1a & p1c & p1b, p1f & p1e & p1d};
+
+    //Assigning outputs
+    assign p2y = andtl | andbl;
+    assign p1y = andtr | andbr;
+
+
+
+endmodule
