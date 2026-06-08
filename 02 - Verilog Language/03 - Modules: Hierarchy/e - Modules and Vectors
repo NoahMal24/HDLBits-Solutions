@@ -1,1 +1,21 @@
-
+module top_module ( 
+    input clk, 
+    input [7:0] d, 
+    input [1:0] sel, 
+    output [7:0] q 
+);
+    wire [7:0] onetwo, twothree, threeout;
+    
+    my_dff8 reg1(.clk(clk), .d(d), .q(onetwo));
+    my_dff8 reg2(.clk(clk), .d(onetwo), .q(twothree));
+    my_dff8 reg3(.clk(clk), .d(twothree), .q(threeout));
+    
+    always @(*) begin
+        case(sel)
+            0 : q = d;
+            1 : q = onetwo;
+            2 : q = twothree;
+            3 : q = threeout;
+        endcase
+    end
+endmodule
