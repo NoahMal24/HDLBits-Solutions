@@ -1,1 +1,7 @@
-
+module top_module ( input clk, input d, output q );
+    wire onetwo, twothree;
+    
+    my_dff reg1(.clk(clk), .d(d), .q(onetwo));
+    my_dff reg2(.clk(clk), .d(onetwo), .q(twothree));
+    my_dff reg3(.clk(clk), .d(twothree), .q(q));
+endmodule
