@@ -6,9 +6,9 @@ module top_module(
     output wire out_assign,
     output reg out_always   ); 
 
-    assign out_assign = (sel_b1 & sel_b2) ? b : a;
+    assign out_assign = (sel_b1 & sel_b2) ? b : a; //if condition (sel...) satisfied, choose b for out, if not a
     
-    always @(*) begin
+    always @(*) begin //Simple if, else statements
         if (sel_b1 & sel_b2) begin
             out_always = b;
         end
