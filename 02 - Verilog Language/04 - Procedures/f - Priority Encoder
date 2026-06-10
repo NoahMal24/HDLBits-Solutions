@@ -1,1 +1,13 @@
-
+module top_module (
+    input [3:0] in,
+    output reg [1:0] pos  );
+    always @(*) begin //Need always to start a case/casez
+        casez (in) //casez allows for the usage of '?' to ignore bits, so ???1 "doesn't care" about the 3 ? bits
+            4'b???1: pos = 0;
+            4'b??10: pos = 1;
+            4'b?100: pos = 2;
+            4'b1000: pos = 3;
+            default: pos = 0;
+        endcase
+    end
+endmodule
