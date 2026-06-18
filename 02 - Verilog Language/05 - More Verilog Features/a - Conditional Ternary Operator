@@ -1,1 +1,14 @@
+module top_module (
+    input [7:0] a, b, c, d,
+    output [7:0] min);//
 
+    //(condition ? if_true : if_false)
+    wire [7:0] minab, mincd;
+    assign minab = (a < b) ? a : b;
+    assign mincd = (c < d) ? c : d;
+    
+    assign min = (minab < mincd) ? minab : mincd;
+    
+    // assign intermediate_result1 = compare? true: false;
+
+endmodule
