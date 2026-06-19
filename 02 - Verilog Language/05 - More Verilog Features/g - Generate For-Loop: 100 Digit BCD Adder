@@ -1,1 +1,38 @@
+module top_module( 
+    input [399:0] a, b,
+    input cin,
+    output cout,
+    output [399:0] sum );
 
+    wire [99:0] w_cout;
+    
+    genvar i;
+    generate
+        for(i=0; i < 100; i = i+1) begin : adder_block //100 instances of 4bit adding
+            if (i==0) begin
+                bcd_fadd adder_instance(
+                    .a(a[3:0]),
+                    .b(b[3:0]),
+                    .cin(cin),
+                    .sum(sum[3:0]),
+                    .cout(w_cout[0])
+                );
+            end
+            else begin
+                bcd_fadd adder_instance( //7:4, 11:8, etc.
+                    .a(a[4*i+3 : 4*i]),
+                    .b(b[4*i+3 : 4*i]),
+                    .cin(w_cout[i-1]),
+                    .sum(sum[4*i+3 : 4*i]),
+                    .cout(w_cout[i])
+                );
+            end
+        end
+    endgenerate
+    
+    assign cout = w_cout[99];
+    
+endmodule
+
+/*Same idea as last one overall, but using 4 bits per add instead of 1, so adjust for that. Make a 100 bit wire for
+cout and use the very last w_cout to set cout equal to.*/
