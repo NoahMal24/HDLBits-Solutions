@@ -1,1 +1,26 @@
+module top_module (input x, input y, output z);
 
+    wire z1, z2;
+    
+	module_A circuit_A(
+        .x1(x),
+        .y1(y),
+        .z1(z1)
+    );
+   
+    module_B circuit_B(
+        .x2(x),
+        .y2(y),
+        .z2(z2)
+    );
+    
+    assign z = (z1 | z2) ^ (z1 & z2);
+endmodule
+
+module module_A (input x1, input y1, output z1);
+    assign z1 = (x1^y1) & x1;
+endmodule  
+
+module module_B (input x2, input y2, output z2);
+    assign z2 = x2 ~^ y2;
+endmodule
