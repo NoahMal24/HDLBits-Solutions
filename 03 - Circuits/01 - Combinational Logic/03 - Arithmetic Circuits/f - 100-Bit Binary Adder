@@ -4,5 +4,5 @@ module top_module(
     output cout,
     output [99:0] sum );
 
-    assign {cout, sum} = a + b + cin;
+    assign {cout, sum} = a + b + cin; //Concatenate these two together, cout effectively becomes sum[100] (101st digit)
 endmodule
